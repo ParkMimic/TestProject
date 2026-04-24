@@ -6,9 +6,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpPower = 5f;
 
-    private bool isGround = false;
-    [SerializeField] Transform groundCheck;
-    [SerializeField] LayerMask structureLayer;
+    public bool isJumping = false;
 
     Rigidbody2D rigid;
     SpriteRenderer sprite;
@@ -24,14 +22,6 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         float inputX = Input.GetAxisRaw("Horizontal");
-
-        // ¹Ù´Ú Ã¼Å©
-        isGround = Physics.CheckSphere(groundCheck.position, 0.125f, structureLayer);
-
-        if (isGround == true)
-        {
-            Debug.Log("¹Ù´Ú °¨Áö");
-        }
         
         Movement(inputX);
         Jump();
@@ -82,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
          */
         if (Input.GetButtonDown("Jump"))
         {
-            anim.SetBool("isJump", true);
+            anim.SetBool("isJump", isJumping);
             rigid.linearVelocity = Vector2.zero;
             rigid.AddForceY(jumpPower, ForceMode2D.Impulse);
         }
