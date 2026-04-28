@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : Checker
 {
     [Header("플레이어 기본 세팅")]
     public float moveSpeed = 5f;
