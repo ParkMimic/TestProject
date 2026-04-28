@@ -1,29 +1,32 @@
 using UnityEngine;
 
-public class PlayerMovement : Checker
+public class PlayerMovement : MonoBehaviour
 {
-    [Header("플레이어 기본 세팅")]
+    [Header("플레이어 조작 세팅")]
     public float moveSpeed = 5f;
     public float jumpPower = 5f;
 
-    public bool isJumping = false;
+    bool isJumping = false;
+    bool isMoving = false;
 
     Rigidbody2D rigid;
     SpriteRenderer sprite;
     Animator anim;
+    Checker checker;
 
     void Awake()
     {
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+        checker = GetComponent<Checker>();
     }
 
     void Update()
     {
         float inputX = Input.GetAxisRaw("Horizontal");
         
-        Movement(inputX);
+        Move(inputX);
         Jump();
         
 
@@ -31,21 +34,21 @@ public class PlayerMovement : Checker
         Flip(inputX);
     }
 
-    void Movement(float inputX)
+    void Move(float inputX)
     {
-        if (Input.GetButton("Horizontal"))
+        if (!isJumping)
         {
-            anim.SetBool("isMove", true);
-        }
-        ;
+            if (Input.GetButton("Horizontal"))
+                anim.SetBool("isMove", true);
 
-        rigid.linearVelocityX = inputX * moveSpeed;
-
-        if (Input.GetButtonUp("Horizontal"))
-        {
-            anim.SetBool("isMove", false);
-            rigid.linearVelocityX = 0;
+            if (Input.GetButtonUp("Horizontal"))
+            {
+                anim.SetBool("isMove", false);
+                rigid.linearVelocityX = 0;
+            }
         }
+
+        rigid.linearVelocityX = 0;
     }
 
     /* 플레이어 움직였을 때 뒤집을 함수
@@ -72,9 +75,18 @@ public class PlayerMovement : Checker
          */
         if (Input.GetButtonDown("Jump"))
         {
-            anim.SetBool("isJump", isJumping);
+            isJumping = true;
+            anim.SetBool("isJump", true);
+            anim.SetBool("isMove", false);
+
             rigid.linearVelocity = Vector2.zero;
             rigid.AddForceY(jumpPower, ForceMode2D.Impulse);
         }
+    }
+
+    public void OnGround()
+    {
+        isJumping = false;
+        anim.SetBool("isJump", false);
     }
 }

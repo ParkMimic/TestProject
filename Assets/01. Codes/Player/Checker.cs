@@ -2,21 +2,14 @@ using UnityEngine;
 
 public class Checker : MonoBehaviour
 {
-    private PlayerMovement player;
+    public State CurrentState { get; private set; }
 
     public Transform groundPos;
     public Transform wallPos;
     public float groundRadius = 0.2f;
     public Vector2 wallBoxSize = new Vector2(0.5f, 1f);
 
-    public bool isJumping = false;
-
     public enum State { Ground, Wall, None }
-
-    private void Awake()
-    {
-        player = GetComponent<PlayerMovement>();
-    }
 
     State CheckState()
     {
@@ -34,9 +27,9 @@ public class Checker : MonoBehaviour
         
         switch (state)
             {
-            case State.Ground: player.isJumping = false;  break;
+            case State.Ground:   break;
             case State.Wall: break;
-            case State.None: isJumping = true; break;
+            case State.None:  break;
         }
     }
 

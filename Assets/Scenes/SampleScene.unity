@@ -353,7 +353,6 @@ GameObject:
   - component: {fileID: 642520618}
   - component: {fileID: 642520621}
   - component: {fileID: 642520623}
-  - component: {fileID: 642520622}
   - component: {fileID: 642520624}
   m_Layer: 0
   m_Name: Player
@@ -511,21 +510,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &642520622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 642520617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 825915411f7200041a4ec4bcea8663d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  moveSpeed: 5
-  jumpPower: 5
-  isJumping: 0
 --- !u!95 &642520623
 Animator:
   serializedVersion: 7
@@ -557,14 +541,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 642520617}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8c2f3120d5a7ef42b4a63b94d082f4f, type: 3}
+  m_Script: {fileID: 11500000, guid: 95a0191d0eef24a4eb53c85d143addf5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Checker
-  groundPos: {fileID: 1353783704}
-  wallPos: {fileID: 1979326768}
-  groundRadius: 0.2
-  wallBoxSize: {x: 0.5, y: 1}
-  isJumping: 0
+  m_EditorClassIdentifier: Assembly-CSharp::Player
+  speed: 2
+  jumpForce: 2
 --- !u!1 &864842251
 GameObject:
   m_ObjectHideFlags: 0
